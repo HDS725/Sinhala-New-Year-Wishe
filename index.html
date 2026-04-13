@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy New Year 2026 ❤️</title>
+    <title>Happy New Year 2026 ❤️ Create By Hasanga Dilshan</title>
     
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@700;800&family=Clicker+Script&family=Noto+Serif+Sinhala:wght@700;900&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@
             align-items: center;
             min-height: 100vh;
             background: #fff5f6; 
-            overflow: hidden;
+            overflow-x: hidden;
             position: fixed;
             width: 100%;
         }
@@ -40,7 +40,6 @@
             transition: all 0.4s ease;
             outline: none;
             min-width: 220px;
-            text-align: center;
         }
 
         @keyframes gradientFlow {
@@ -52,19 +51,20 @@
         #surprise-btn.loading {
             transform: scale(1.1);
             box-shadow: 0 0 30px 10px rgba(142, 68, 173, 0.6), 0 0 50px 20px rgba(255, 30, 86, 0.4);
-            letter-spacing: 1px;
             pointer-events: none;
         }
 
-        /* --- Content Box --- */
+        /* --- Updated Responsive Box --- */
         #main-content {
             display: none;
             background: rgba(255, 255, 255, 0.6) !important; 
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            width: 90vw;
+            width: 92vw;
             max-width: 400px;
-            height: 520px; 
+            /* Height එක auto කිරීමෙන් අකුරු කැපීම වළකී */
+            height: auto; 
+            min-height: 480px; 
             padding: 25px;
             border-radius: 30px;
             border: 3px solid #d81b60; 
@@ -73,46 +73,34 @@
             align-items: center;
             z-index: 10;
             position: relative;
-            /* Fade in Animation */
-            animation: fadeIn 0.8s ease-out forwards;
         }
 
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
+        .year-display { font-size: 2rem; font-weight: 900; color: #d81b60; font-family: 'Noto Serif Sinhala', serif; margin-bottom: 5px; }
+        h1 { color: #d81b60; font-size: 1.5rem; margin: 0 0 15px 0; text-align: center; font-family: 'Noto Serif Sinhala', serif; font-weight: 900; }
 
-        .year-display { font-size: 2.2rem; font-weight: 900; color: #d81b60; font-family: 'Noto Serif Sinhala', serif; margin-bottom: 5px; }
-        h1 { color: #d81b60; font-size: 1.6rem; margin: 0 0 15px 0; text-align: center; font-family: 'Noto Serif Sinhala', serif; font-weight: 900; }
-
-        /* Updated Typing Area for Scrolling */
+        /* Typing Area එක අකුරු වලට ඉඩ ලැබෙන සේ සැකසීම */
         #typing-area { 
             width: 100%; 
-            height: 220px; /* උස ස්ථාවරව තැබේ */
+            min-height: 180px; 
             text-align: center; 
-            overflow: hidden; /* කොටුවෙන් පිටතට යන අකුරු නොපෙනී යයි */
-            position: relative;
             display: flex;
-            align-items: flex-start; /* උඩ සිට පටන් ගනී */
+            align-items: center;
             justify-content: center;
         }
 
         #typing-text { 
             font-family: 'Gemunu Libre', sans-serif; 
-            font-size: 1.15rem; 
-            line-height: 1.6; 
+            font-size: 1.1rem; 
+            line-height: 1.5; 
             color: #222; 
             font-weight: 500; 
-            /* අකුරු උඩට scroll කිරීම සඳහා */
-            position: relative;
-            display: block;
         }
 
         #signature {
             color: #d81b60; 
             opacity: 0; 
             text-align: center; 
-            margin-top: auto; 
+            margin-top: 20px; 
             padding-bottom: 10px; 
             transition: opacity 1.5s ease;
         }
@@ -130,7 +118,7 @@
 
 <body>
 
-    <audio id="bg-music" loop preload="auto">
+    <audio id="bg-music" loop>
         <source src="https://github.com/HDS725/my-assets/raw/refs/heads/main/Heart%20Touching%20Shayari%20background%20music%20%F0%9F%8E%B6%20Instrumental%20Ringtone%20%F0%9F%92%97%20New%20Mobile%20Ringtone%202022%20-%20DharmendraSaab3.mp3" type="audio/mpeg">
     </audio>
 
@@ -154,7 +142,7 @@
             btn.classList.add('loading');
             
             let count = 0;
-            const speed = 15; // වේගය මෙතැනින් පාලනය වේ (දැන් වේගවත් කර ඇත)
+            const speed = 29; // වේගය මෙතැනින් පාලනය වේ (දැන් වේගවත් කර ඇත)
 
             const interval = setInterval(() => {
                 count++;
@@ -190,20 +178,10 @@
         const fullText = "ලැබුවා වූ මේ සිංහල දෙමළ අලුත් අවුරුද්ද මගේ රත්තරන් පැටියට සාමය, සතුට පිරි, කිසිම ලෙඩක් දුකක් නැති, කරදර බාධාවලින් තොර වාසනාවන්ත අවුරුද්දක් වේවා! කිරියෙන් පැණියෙන් ඉතිරෙනවා! ඒ වගේම අපේ ආදරයත් මේ අවුරුද්ද පුරාම සතුටින් පිරී ඉතිරෙන්න කියලා මම මගේ මුළු හදවතින්ම ප්‍රාර්ථනා කරනවා. හැමදාමත් මගේම වෙලා මගේ ළඟින්ම ඉන්න! සුබම සුබ අලුත් අවුරුද්දක් වේවා මගේ පණ! 🌸❤️";
         let i = 0;
 
-        // --- Updated Auto-Scrolling Typing Function ---
         function startTyping() {
-            const textSpan = document.getElementById("typing-text");
-            const typingArea = document.getElementById("typing-area");
-
             if (i < fullText.length) {
-                textSpan.innerHTML += fullText.charAt(i);
+                document.getElementById("typing-text").innerHTML += fullText.charAt(i);
                 i++;
-
-                // අකුරු පේළියෙන් පේළිය මතු වෙද්දී උඩට scroll කිරීම
-                if (textSpan.offsetHeight > typingArea.offsetHeight) {
-                    typingArea.scrollTop = textSpan.offsetHeight - typingArea.offsetHeight;
-                }
-
                 setTimeout(startTyping, 45); 
             } else {
                 setTimeout(() => {
