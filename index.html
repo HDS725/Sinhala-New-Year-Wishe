@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy New Year 2026 ❤️</title>
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@700;800&family=Clicker+Script&family=Noto+Serif+Sinhala:wght@700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * { box-sizing: border-box; }
+
+        /* (2) මුළු වෙබ් පිටුවේම පසුබිම (Background) */
+        /* පිටුව මැදට අකුරු ගෙන ඒම සහ ලා රෝස පැහැය ලබා දීම මෙහිදී සිදු වේ. */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #fff5f6; 
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+            touch-action: none;
+            position: fixed;
+            width: 100%;
+        }
+
+        /* (3) ආරම්භක බොත්තමේ පෙනුම (Surprise Button Style) */
+        /* මුලින්ම පේන බොත්තමේ පාට, හැඩය සහ සෙවනැලි මෙතැනින් පාලනය වේ. */
+        #surprise-btn {
+            padding: 22px 50px;
+            font-size: 1.5rem;
+            background: linear-gradient(45deg, #d81b60, #ff4081);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            z-index: 100;
+            transition: transform 0.3s ease-out, opacity 0.8s ease-in, background 0.4s ease, box-shadow 0.4s ease;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(216, 27, 96, 0.4);
+        }
+
+        /* (4) බොත්තම එබූ විට සිදුවන වෙනස්කම් (Button Animation) */
+        /* ඔබන විට බොත්තම මැකී ගොස් රන්වන් එළියක් විහිදීම මෙයින් සිදු වේ. */
+        #surprise-btn.clicked {
+            transform: scale(1.1);
+            opacity: 0;
+            background: linear-gradient(45deg, #9c27b0, #e91e63);
+            box-shadow: 0 0 100px 50px rgba(255, 215, 0, 0.9), 0 0 150px 70px rgba(255, 223, 0, 0.6); 
+            pointer-events: none;
+        }
+
+        /* (5) ප්‍රධාන විශ් එක ඇති පෙට්ටිය (Main Content Box) */
+        /* වීදුරුවක් වැනි (Glass Effect) විනිවිද පෙනෙන පෙට්ටියේ පෙනුම මෙතැනින් පාලනය වේ. */
+        #main-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.1) !important; 
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(3px);
+            width: 88vw;
+            max-width: 450px;
+            min-height: 640px;
+            padding: 25px;
+            border-radius: 35px;
+            border: 4px solid #d81b60; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        /* (6) 2026 අංකයේ පෙනුම සහ Animation එක */
+        /* වසර පෙන්වන අංකය ලොකු කුඩා වෙමින් පණ ගැහෙන ආකාරය මෙයින් පාලනය වේ. */
+        .year-display {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #d81b60;
+            margin-bottom: 5px;
+            font-family: 'Noto Serif Sinhala', serif;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); color: #ff4081; }
+            100% { transform: scale(1); }
+        }
+
+        /* (7) ප්‍රධාන මාතෘකාව (Heading) */
+        h1 {
+            color: #d81b60;
+            font-size: 2rem;
+            margin: 0 0 65px 0;
+            text-align: center;
+            font-family: 'Noto Serif Sinhala', serif;
+            font-weight: 900;
+        }
+
+        /* (8) අකුරු ටයිප් වන ස්ථානය (Typing Area) */
+        #typing-area {
+            width: 100%;
+            height: 350px;
+            text-align: center;
+        }
+
+        #typing-text {
+            font-family: 'Gemunu Libre', sans-serif;
+            font-size: 1.4rem; 
+            line-height: 1.5;
+            color: #1a1a1a;
+            font-weight: 500; 
+            display: inline-block;
+        }
+
+        /* (9) අවසානයේ එන නම (Signature Section) */
+        /* "මෙයට ඔබේ ආදරණීය" සහ නම සඳහා වූ Style මෙහි ඇතුළත් වේ. */
+        #signature {
+            color: #d81b60;
+            opacity: 0;
+            transform: translateY(15px);
+            transition: all 1.5s ease;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        #signature.pop-up {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        #to-love {
+            font-family: 'Noto Serif Sinhala', serif;
+            font-size: 0.95rem;
+            font-weight: 900; 
+            display: block;
+        }
+
+        #user-name {
+            font-family: 'Clicker Script', cursive;
+            font-size: 2.5rem;
+            display: block;
+            margin-top: -5px;
+            font-weight: 900; 
+        }
+
+        /* (10) පසුබිමේ ඉහළට යන Hearts (Background Hearts) */
+        .bg-heart {
+            position: absolute;
+            color: #b71c1c; 
+            bottom: -50px;
+            animation: rise linear infinite;
+            z-index: 1;
+            filter: drop-shadow(0 0 10px rgba(183, 28, 28, 0.8)); 
+        }
+
+        @keyframes rise {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <audio id="bg-music" loop preload="auto">
+        <source src="https://github.com/HDS725/my-assets/raw/refs/heads/main/Heart%20Touching%20Shayari%20background%20music%20%F0%9F%8E%B6%20Instrumental%20Ringtone%20%F0%9F%92%97%20New%20Mobile%20Ringtone%202022%20-%20DharmendraSaab3.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="surprise-btn" onclick="openSurprise(this)">SURPRISE CHUTI ✨</button>
+
+    <div id="main-content">
+        <div class="year-display">2026</div>
+        <h1>සුභ අලුත් අවුරුද්දක් වේවා!</h1>
+        <div id="typing-area"><span id="typing-text"></span></div>
+        <div id="signature">
+            <span id="to-love">මෙයට ඔබේ ආදරණීය</span>
+            <span id="user-name">Hasanga Dilshan</span>
+        </div>
+    </div>
+
+    <script>
+        /* (13) බොත්තම එබූ විට ක්‍රියාත්මක වන ප්‍රධාන Function එක */
+        function openSurprise(btn) {
+            const music = document.getElementById('bg-music');
+            music.play().catch(e => console.log("Audio play blocked"));
+
+            btn.classList.add('clicked');
+
+            setTimeout(() => {
+                btn.style.display = 'none';
+                document.getElementById('main-content').style.display = 'flex';
+
+                var end = Date.now() + (3 * 1000);
+                
+                /* (14) මල් වෙඩි (Confetti) ක්‍රියාත්මක වන ආකාරය */
+                (function frame() {
+                    // startVelocity සහ gravity මඟින් වේගය වැඩි කර ඇත.
+                    confetti({ 
+                        particleCount: 4, 
+                        angle: 60, 
+                        spread: 60, 
+                        origin: { x: 0 }, 
+                        colors: ['#9c27b0', '#ff4081'],
+                        startVelocity: 45, // වේගයෙන් විදීම සඳහා
+                        gravity: 1.2,      // වේගයෙන් බිමට වැටීම සඳහා
+                        ticks: 200 
+                    });
+
+                    confetti({ 
+                        particleCount: 4, 
+                        angle: 120, 
+                        spread: 60, 
+                        origin: { x: 1 }, 
+                        colors: ['#9c27b0', '#ff4081'],
+                        startVelocity: 45,
+                        gravity: 1.2,
+                        ticks: 200 
+                    });
+
+                    if (Date.now() < end) { requestAnimationFrame(frame); }
+                }());
+
+                startTyping();
+            }, 800); 
+        }
+
+        /* (15) අකුරු එකින් එක ටයිප් වීමේ Function එක */
+        const fullText = "ලැබුවා වූ මේ සිංහල දෙමළ අලුත් අවුරුද්ද මගේ රත්තරන් පැටියට සාමය, සතුට පිරි, කිසිම ලෙඩක් දුකක් නැති, කරදර බාධාවලින් තොර වාසනාවන්ත අවුරුද්දක් වේවා! කිරියෙන් පැණියෙන් ඉතිරෙනවා! ඒ වගේම අපේ ආදරයත් මේ අවුරුද්ද පුරාම සතුටින් පිරී ඉතිරෙන්න කියලා මම මගේ මුළු හදවතින්ම ප්‍රාර්ථනා කරනවා. හැමදාමත් මගේම වෙලා මගේ ළඟින්ම ඉන්න! සුබම සුබ අලුත් අවුරුද්දක් වේවා මගේ පණ! 🌸❤️";
+        let i = 0;
+
+        function startTyping() {
+            if (i < fullText.length) {
+                document.getElementById("typing-text").innerHTML += fullText.charAt(i);
+                i++;
+                setTimeout(startTyping, 55); 
+            } else {
+                setTimeout(() => {
+                    document.getElementById('signature').classList.add('pop-up');
+                }, 500);
+            }
+        }
+
+        /* (16) හාර්ට්ස් (Rising Hearts) නිර්මාණය කිරීමේ Function එක */
+        function createRisingHeart() {
+            const h = document.createElement('div');
+            h.classList.add('bg-heart');
+            h.innerHTML = '❤️';
+            h.style.left = Math.random() * 100 + 'vw';
+            h.style.fontSize = Math.random() * 12 + 18 + 'px'; 
+            h.style.animationDuration = (Math.random() * 3 + 5) + 's';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 8000);
+        }
+        
+        // තත්පර 0.2 කට වරක් අලුත් Heart එකක් සාදයි.
+        setInterval(createRisingHeart, 200);
+    </script>
+
+</body>
+</html>
