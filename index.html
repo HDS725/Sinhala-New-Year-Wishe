@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy New Year 2026 ❤️</title>
+    <title>Happy New Year 2026 ❤️ Creating By Hasanga Dilshan</title>
     
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@700;800&family=Clicker+Script&family=Noto+Serif+Sinhala:wght@700;900&display=swap" rel="stylesheet">
@@ -19,12 +19,11 @@
             align-items: center;
             min-height: 100vh;
             background: #fff5f6; 
-            overflow: hidden;
+            overflow-x: hidden;
             position: fixed;
             width: 100%;
         }
 
-        /* --- Highlighting & Animated Button --- */
         #surprise-btn {
             padding: 18px 50px;
             font-size: 1.3rem;
@@ -41,7 +40,6 @@
             transition: all 0.4s ease;
             outline: none;
             min-width: 220px;
-            text-align: center;
         }
 
         @keyframes gradientFlow {
@@ -50,23 +48,23 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* බටන් එක එබූ පසු Highlight වී දිස්නය දෙන ආකාරය */
         #surprise-btn.loading {
             transform: scale(1.1);
             box-shadow: 0 0 30px 10px rgba(142, 68, 173, 0.6), 0 0 50px 20px rgba(255, 30, 86, 0.4);
-            letter-spacing: 1px;
             pointer-events: none;
         }
 
-        /* --- Fixed Content Box --- */
+        /* --- Updated Responsive Box --- */
         #main-content {
             display: none;
-            background: rgba(255, 255, 255, 0.5) !important; 
+            background: rgba(255, 255, 255, 0.6) !important; 
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            width: 90vw;
+            width: 92vw;
             max-width: 400px;
-            height: 520px; 
+            /* Height එක auto කිරීමෙන් අකුරු කැපීම වළකී */
+            height: auto; 
+            min-height: 480px; 
             padding: 25px;
             border-radius: 30px;
             border: 3px solid #d81b60; 
@@ -77,14 +75,34 @@
             position: relative;
         }
 
-        .year-display { font-size: 2.2rem; font-weight: 900; color: #d81b60; font-family: 'Noto Serif Sinhala', serif; margin-bottom: 5px; }
-        h1 { color: #d81b60; font-size: 1.6rem; margin: 0 0 15px 0; text-align: center; font-family: 'Noto Serif Sinhala', serif; font-weight: 900; }
+        .year-display { font-size: 2rem; font-weight: 900; color: #d81b60; font-family: 'Noto Serif Sinhala', serif; margin-bottom: 5px; }
+        h1 { color: #d81b60; font-size: 1.5rem; margin: 0 0 15px 0; text-align: center; font-family: 'Noto Serif Sinhala', serif; font-weight: 900; }
 
-        #typing-area { width: 100%; height: 220px; text-align: center; overflow: hidden; }
-        #typing-text { font-family: 'Gemunu Libre', sans-serif; font-size: 1.15rem; line-height: 1.6; color: #222; font-weight: 500; }
+        /* Typing Area එක අකුරු වලට ඉඩ ලැබෙන සේ සැකසීම */
+        #typing-area { 
+            width: 100%; 
+            min-height: 180px; 
+            text-align: center; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #typing-text { 
+            font-family: 'Gemunu Libre', sans-serif; 
+            font-size: 1.1rem; 
+            line-height: 1.5; 
+            color: #222; 
+            font-weight: 500; 
+        }
 
         #signature {
-            color: #d81b60; opacity: 0; text-align: center; margin-top: auto; padding-bottom: 10px; transition: opacity 1.5s ease;
+            color: #d81b60; 
+            opacity: 0; 
+            text-align: center; 
+            margin-top: 20px; 
+            padding-bottom: 10px; 
+            transition: opacity 1.5s ease;
         }
         #signature.pop-up { opacity: 1; }
         #user-name { font-family: 'Clicker Script', cursive; font-size: 2.2rem; display: block; margin-top: -5px; }
@@ -121,34 +139,32 @@
             const music = document.getElementById('bg-music');
             music.play().catch(e => console.log("Audio blocked"));
 
-            // Button එක Highlight කිරීම
             btn.classList.add('loading');
             
             let count = 0;
-            // Loading Animation එක (0 සිට 100 දක්වා)
+            const speed = 15; // වේගය මෙතැනින් පාලනය වේ (දැන් වේගවත් කර ඇත)
+
             const interval = setInterval(() => {
                 count++;
                 btn.innerHTML = `LOADING ${count}%`;
                 
                 if (count >= 100) {
                     clearInterval(interval);
-                    // 100% වුණාම සිනිදුව මැකී යාම
                     btn.style.opacity = '0';
-                    btn.style.transform = 'scale(1.5)';
+                    btn.style.transform = 'scale(1.2)';
                     
                     setTimeout(() => {
                         btn.style.display = 'none';
                         showContent();
                     }, 500);
                 }
-            }, 30); // වේගය මෙතැනින් පාලනය කළ හැක (30ms)
+            }, speed);
         }
 
         function showContent() {
             const main = document.getElementById('main-content');
             main.style.display = 'flex';
 
-            // Confetti
             var end = Date.now() + (2 * 1000);
             (function frame() {
                 confetti({ particleCount: 4, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#a777e3', '#ff4081'] });
